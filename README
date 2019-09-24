@@ -1,0 +1,8 @@
+# Basic implementation of stack
+
+# Build
+# g++ main.cpp -I. -o stack.out
+
+# Run
+# ./stack.out
+
