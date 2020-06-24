@@ -1,55 +1,69 @@
 #include <iostream>
-#include <string>
 #include <vector>
-#include <cstdint>
+#include <cassert>
 
-#ifndef __STACK_H__
-#define __STACK_H__
-
-template<typename T>
+template <class T>
 class MyStack
 {
-	public:
-		MyStack(int sz) : stack_limit(sz)
-		{
-			st.resize(sz);
-			mytop = -1;
-		};
+    public:
+        MyStack(size_t n = 256)
+        {
+            stack_size = n;
+            std::cout << "Creating stack with " << n << " elements" << std::endl;
 
-		bool push(const T & x)
-		{
-			if(mytop >= stack_limit)
-				return false;
+            stack.resize(n);
+            index = -1;
 
-			st[ ++mytop] = x;
+        }
 
-			return true;
-		};
+        ~MyStack()
+        {
+            std::cout << "Destroying stack" << std::endl;
+        }
+        
+        bool isStackEmpty()
+        {
+            return (index == -1);
+        }
 
-		void pop(void)
-		{
-			if(!is_empty())
-				--mytop;
-		};
+        bool isStackFull()
+        {
+            return (stack_size == (index + 1));
+        }
 
-		T top(void) const
-		{
-			if(!is_empty())
-				return st[mytop];
+        bool myStackPush(const T & item)
+        {
+            if(!isStackFull())
+            {
+                ++index;
+                stack.at(index) = item;
 
-			return -1;
-		};
+                return true;
+            }
 
-		bool is_empty(void) const
-		{
-			return (mytop <= -1);
-		}
+            return false;
+        }
 
-	private:
-		std::vector<T> st;
-		int stack_limit;
-		int mytop;
+        bool myStackPop(void)
+        {
+            if(!isStackEmpty())
+            {
+                --index;
+                return true;
+            }
+
+            return false;
+        }
+
+        T myStackTop()
+        {
+            assert(!isStackEmpty());
+                
+            return stack.at(index);
+        }
+
+    private:
+        std::vector<T> stack;
+        size_t stack_size;
+        int index;
 };
-
-
-#endif // __STACK_H__

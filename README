@@ -1,7 +1,7 @@
 # Basic implementation of stack
 
 # Build
-# g++ main.cpp -I. -o stack.out
+# g++ Stack.cpp -I. -o stack.out --std=c++11
 
 # Run
 # ./stack.out
