@@ -6,3 +6,6 @@
 # Run
 # ./stack.out
 
+
+# Build ReverseStringUsingStack.cpp
+# g++ ReverseStringUsingStack.cpp
